@@ -24,7 +24,8 @@ for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
     data = stream.read(CHUNK)
     data_chunk = array('h', data)
     vol = max(data_chunk)
-    if (vol >= 500):
+    print(vol)
+    if (vol >= 2000):
         print("something said")
         frames.append(data)
     else:
