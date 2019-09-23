@@ -1,6 +1,7 @@
 import pyaudio
 import wave
 from array import array
+import time
 
 FORMAT = pyaudio.paInt16
 CHANNELS = 2
@@ -19,7 +20,8 @@ stream = audio.open(format=FORMAT, channels=CHANNELS,
 
 # starting recording
 frames = []
-
+timer = 0
+start_time = time.time()
 for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
     data = stream.read(CHUNK)
     data_chunk = array('h', data)
@@ -27,10 +29,16 @@ for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
     print(vol)
     if (vol >= 2000):
         print("something said")
+        timer = 0
+        print(timer)
         frames.append(data)
     else:
+        timer = timer + time.time() - start_time
+        print(timer)
         print("nothing")
     print("\n")
+    if timer > 1000:
+        break
 
 # end of recording
 stream.stop_stream()
