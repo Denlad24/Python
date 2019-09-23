@@ -27,7 +27,7 @@ for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
     data_chunk = array('h', data)
     vol = max(data_chunk)
     print(vol)
-    if (vol >= 2000):
+    if (vol >= 1500):
         print("something said")
         timer = 0
         print(timer)
@@ -37,8 +37,10 @@ for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
         print(timer)
         print("nothing")
     print("\n")
-    if timer > 1000:
+    if timer > 500:
+        print("stop")
         break
+
 
 # end of recording
 stream.stop_stream()
